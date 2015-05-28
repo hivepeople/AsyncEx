@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Nito.AsyncEx.Internal;
 using Nito.AsyncEx.Synchronous;
+using System.Collections;
 
 namespace Nito.AsyncEx
 {
@@ -15,7 +16,7 @@ namespace Nito.AsyncEx
     /// <typeparam name="T">The type of elements contained in the queue.</typeparam>
     [DebuggerDisplay("Count = {_queue.Count}, MaxCount = {_maxCount}")]
     [DebuggerTypeProxy(typeof(AsyncProducerConsumerQueue<>.DebugView))]
-    public sealed class AsyncProducerConsumerQueue<T> : IDisposable
+    public sealed class AsyncProducerConsumerQueue<T> : IEnumerable<T>, IDisposable
     {
         /// <summary>
         /// The underlying queue.
@@ -525,6 +526,25 @@ namespace Nito.AsyncEx
             {
                 get { return _queue._queue.ToArray(); }
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            var typedSeq = this as IEnumerable<T>;
+            return typedSeq.GetEnumerator();
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            IList<T> snapshot = null;
+
+            // Take a snapshot of the queue under lock
+            using (_mutex.Lock())
+            {
+                snapshot = _queue.ToArray();
+            }
+
+            return snapshot.GetEnumerator();
         }
     }
 
