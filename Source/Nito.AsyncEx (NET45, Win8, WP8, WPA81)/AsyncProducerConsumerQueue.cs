@@ -528,13 +528,21 @@ namespace Nito.AsyncEx
             }
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the queue in a thread-safe manner. This enumerator is snapshot-based, meaning that modifications to the queue occuring during iteration, will not be seen by this enumerator.
+        /// </summary>
+        /// <returns>A snapshot of the current items in the queue.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             var typedSeq = this as IEnumerable<T>;
             return typedSeq.GetEnumerator();
         }
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        /// <summary>
+        /// Returns an enumerator that iterates through the queue in a thread-safe manner. This enumerator is snapshot-based, meaning that modifications to the queue occuring during iteration, will not be seen by this enumerator.
+        /// </summary>
+        /// <returns>A snapshot of the current items in the queue.</returns>
+        public IEnumerator<T> GetEnumerator()
         {
             IList<T> snapshot = null;
 

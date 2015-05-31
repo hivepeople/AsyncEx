@@ -670,6 +670,63 @@ namespace Tests
         }
 
         [Test]
+        public void GetEnumerator_NoItemsInQueue_ReturnsEmptySeq()
+        {
+            var queue = new AsyncProducerConsumerQueue<int>();
+            var seq = queue as IEnumerable<int>;
+            Assert.That(seq.Count, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void GetEnumerator_ItemsInQueue_ReturnsItems()
+        {
+            var queue = new AsyncProducerConsumerQueue<int>(new[] { 1, 2, 3 });
+            var seq = queue as IEnumerable<int>;
+            Assert.That(seq, Is.EqualTo(new[] { 1, 2, 3 }));
+        }
+
+        [Test]
+        public void GetEnumerator_ItemInQueue_DoesNotConsumeItem()
+        {
+            var queue = new AsyncProducerConsumerQueue<int>(new[] { 1 });
+            var seq = queue as IEnumerable<int>;
+
+            // Force enumeration
+            int sum = seq.Sum();
+            Assert.That(sum, Is.EqualTo(1));
+
+            int val = queue.Dequeue();
+            Assert.That(val, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void GetEnumerator_ModDuringEnumeration_RetainsSnapshot()
+        {
+            var queue = new AsyncProducerConsumerQueue<int>(new[] { 1, 2, 3 });
+            var seq = queue as IEnumerable<int>;
+            var enumerator = seq.GetEnumerator();
+
+            bool hasNext = enumerator.MoveNext();
+            Assert.That(hasNext, Is.True);
+            Assert.That(enumerator.Current, Is.EqualTo(1));
+
+            queue.Enqueue(4);
+            var num = queue.Dequeue();
+            Assert.That(num, Is.EqualTo(1));
+
+            hasNext = enumerator.MoveNext();
+            Assert.That(hasNext, Is.True);
+            Assert.That(enumerator.Current, Is.EqualTo(2));
+
+            hasNext = enumerator.MoveNext();
+            Assert.That(hasNext, Is.True);
+            Assert.That(enumerator.Current, Is.EqualTo(3));
+
+            hasNext = enumerator.MoveNext();
+            Assert.That(hasNext, Is.False);
+        }
+
+        [Test]
         public void StandardAsyncSingleConsumerCode()
         {
             Test.Async(async () =>
