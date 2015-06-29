@@ -674,7 +674,7 @@ namespace Tests
         {
             var queue = new AsyncProducerConsumerQueue<int>();
             var seq = queue as IEnumerable<int>;
-            Assert.That(seq.Count, Is.EqualTo(0));
+            Assert.That(seq.Count(), Is.EqualTo(0));
         }
 
         [Test]
