@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Nito.AsyncEx</id>
-    <version>3.0.1-pre</version> <!-- Also change [AssemblyVersion] and Nito.AsyncEx.Dataflow.nuspec -->
+    <version>3.0.1-zhivepeople</version> <!-- Also change [AssemblyVersion] and Nito.AsyncEx.Dataflow.nuspec -->
     <title>Async and Task Helpers</title>
     <authors>Stephen Cleary</authors>
     <owners>Stephen Cleary</owners>
@@ -33,7 +33,7 @@
       <group />
     </dependencies>
     <releaseNotes>
-      Minor bugfixes. Added strong-name and iOS Unified support.
+      Minor bugfixes. Added strong-name and iOS Unified support. AsyncProducerConsumerQueue explicitly implements IEnumerable(of T).
 <!--  
       [3.0.0] Added support for WPA targets; better usability for AsyncLock and AsyncReaderWriterLock.
       [2.1.3] Bugfix for WinPhone8 platform (and made enlightenment assembly loading more resilient in general).

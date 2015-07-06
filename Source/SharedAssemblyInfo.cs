@@ -9,4 +9,4 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(false)]
 
 [assembly: AssemblyVersion("3.0.1")]
-[assembly: AssemblyInformationalVersion("3.0.1-pre")]
+[assembly: AssemblyInformationalVersion("3.0.1-zhivepeople")]
