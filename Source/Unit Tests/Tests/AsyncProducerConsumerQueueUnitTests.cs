@@ -727,6 +727,78 @@ namespace Tests
         }
 
         [Test]
+        public void IsAddingCompleted_Initially_ReturnsFalse()
+        {
+            // For empty queue
+            var emptyQueue = new AsyncProducerConsumerQueue<int>();
+            Assert.That(emptyQueue.IsAddingCompleted, Is.False);
+
+            // For non-empty queue
+            var nonEmptyQueue = new AsyncProducerConsumerQueue<int>(new[] { 1, 2, 3 });
+            Assert.That(nonEmptyQueue.IsAddingCompleted, Is.False);
+        }
+
+        [Test]
+        public void IsAddingCompleted_AfterEnqueue_ReturnsFalse()
+        {
+            var queue = new AsyncProducerConsumerQueue<int>();
+            queue.Enqueue(1);
+            Assert.That(queue.IsAddingCompleted, Is.False);
+        }
+
+        [Test]
+        public void IsAddingCompleted_AfterCompleteAddingOnEmptyQueue_ReturnsTrue()
+        {
+            var queue = new AsyncProducerConsumerQueue<int>();
+            queue.CompleteAdding();
+            Assert.That(queue.IsAddingCompleted, Is.True);
+        }
+
+        [Test]
+        public void IsAddingCompleted_AfterCompleteAddingOnNonEmptyQueue_ReturnsTrue()
+        {
+            var queue = new AsyncProducerConsumerQueue<int>(new[] { 1 });
+            queue.CompleteAdding();
+            Assert.That(queue.IsAddingCompleted, Is.True);
+        }
+
+        [Test]
+        public void IsCompleted_Initially_ReturnsFalse()
+        {
+            // For empty queue
+            var emptyQueue = new AsyncProducerConsumerQueue<int>();
+            Assert.That(emptyQueue.IsCompleted, Is.False);
+
+            // For non-empty queue
+            var nonEmptyQueue = new AsyncProducerConsumerQueue<int>(new[] { 1, 2, 3 });
+            Assert.That(nonEmptyQueue.IsCompleted, Is.False);
+        }
+
+        [Test]
+        public void IsCompleted_AfterEnqueue_ReturnsFalse()
+        {
+            var queue = new AsyncProducerConsumerQueue<int>();
+            queue.Enqueue(1);
+            Assert.That(queue.IsCompleted, Is.False);
+        }
+
+        [Test]
+        public void IsCompleted_AfterCompleteAddingOnEmptyQueue_ReturnsTrue()
+        {
+            var queue = new AsyncProducerConsumerQueue<int>();
+            queue.CompleteAdding();
+            Assert.That(queue.IsCompleted, Is.True);
+        }
+
+        [Test]
+        public void IsCompleted_AfterCompleteAddingOnNonEmptyQueue_ReturnsFalse()
+        {
+            var queue = new AsyncProducerConsumerQueue<int>(new[] { 1 });
+            queue.CompleteAdding();
+            Assert.That(queue.IsCompleted, Is.False);
+        }
+
+        [Test]
         public void StandardAsyncSingleConsumerCode()
         {
             Test.Async(async () =>

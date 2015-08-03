@@ -54,6 +54,31 @@ namespace Nito.AsyncEx
         internal static readonly DequeueResult FalseResult = new DequeueResult(null, default(T));
 
         /// <summary>
+        /// Gets whether this <see cref="AsyncProducerConsumerQueue{T}"/> has been marked as
+        /// complete for adding.
+        /// </summary>
+        public bool IsAddingCompleted { get { return _completed.IsCancellationRequested; } }
+
+        /// <summary>
+        /// Gets whether this <see cref="AsyncProducerConsumerQueue{T}"/> has been marked as
+        /// complete for adding and is empty.
+        /// </summary>
+        /// <remarks>This method executes in time linear in the number of items in the queue.</remarks>
+        public bool IsCompleted
+        {
+            get
+            {
+                using (_mutex.Lock())
+                {
+                    if (!_completed.IsCancellationRequested)
+                        return false;
+
+                    return this.AsEnumerable().Count() == 0;
+                }
+            }
+        }
+
+        /// <summary>
         /// Creates a new async-compatible producer/consumer queue with the specified initial elements and a maximum element count.
         /// </summary>
         /// <param name="collection">The initial elements to place in the queue.</param>
