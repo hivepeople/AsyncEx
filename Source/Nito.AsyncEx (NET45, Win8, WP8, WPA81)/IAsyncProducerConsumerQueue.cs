@@ -9,7 +9,7 @@ namespace Nito.AsyncEx
     /// An async-compatible producer/consumer queue.
     /// </summary>
     /// <typeparam name="T">The type of elements contained in the queue.</typeparam>
-    public interface IAsyncProducerConsumerQueue<T>
+    public interface IAsyncProducerConsumerQueue<T> : IEnumerable<T>
     {
         #region Enqueue
         /// <summary>

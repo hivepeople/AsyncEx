@@ -16,7 +16,7 @@ namespace Nito.AsyncEx
     /// <typeparam name="T">The type of elements contained in the queue.</typeparam>
     [DebuggerDisplay("Count = {_queue.Count}, MaxCount = {_maxCount}")]
     [DebuggerTypeProxy(typeof(AsyncProducerConsumerQueue<>.DebugView))]
-    public sealed class AsyncProducerConsumerQueue<T> : IEnumerable<T>, IDisposable, IAsyncProducerConsumerQueue<T>
+    public sealed class AsyncProducerConsumerQueue<T> : IAsyncProducerConsumerQueue<T>, IDisposable
     {
         /// <summary>
         /// The underlying queue.
