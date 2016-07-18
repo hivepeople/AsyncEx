@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Nito.AsyncEx</id>
-    <version>$version$</version>
+    <version>3.0.1-zhivepeople2</version> <!-- Also change [AssemblyVersion] and Nito.AsyncEx.Dataflow.nuspec -->
     <title>Async and Task Helpers</title>
     <authors>Stephen Cleary</authors>
     <owners>Stephen Cleary</owners>
