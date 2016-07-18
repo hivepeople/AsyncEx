@@ -8,5 +8,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © 2011-2014 Stephen Cleary")]
 [assembly: CLSCompliant(false)]
 
-[assembly: AssemblyVersion("3.0.1")]
-[assembly: AssemblyInformationalVersion("3.0.1-zhivepeople1")]
+[assembly: AssemblyVersion("3.0.1.2")]
+[assembly: AssemblyInformationalVersion("3.0.1-zhivepeople2")]  // Also change Nito.AsyncEx.nuspec and Nito.AsyncEx.Dataflow.nuspec -->
