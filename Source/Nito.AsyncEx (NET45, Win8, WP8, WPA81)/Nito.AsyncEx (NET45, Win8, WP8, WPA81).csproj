@@ -90,6 +90,7 @@
     <Compile Include="DeferralManager.cs" />
     <Compile Include="Deque.cs" />
     <Compile Include="ExceptionHelpers.cs" />
+    <Compile Include="IAsyncProducerConsumerQueue.cs" />
     <Compile Include="Internal\IdManager.cs" />
     <Compile Include="Internal\ReflectionShim.cs" />
     <Compile Include="Internal\TaskShim.cs" />

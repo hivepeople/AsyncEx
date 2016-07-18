@@ -16,7 +16,7 @@ namespace Nito.AsyncEx
     /// <typeparam name="T">The type of elements contained in the queue.</typeparam>
     [DebuggerDisplay("Count = {_queue.Count}, MaxCount = {_maxCount}")]
     [DebuggerTypeProxy(typeof(AsyncProducerConsumerQueue<>.DebugView))]
-    public sealed class AsyncProducerConsumerQueue<T> : IEnumerable<T>, IDisposable
+    public sealed class AsyncProducerConsumerQueue<T> : IEnumerable<T>, IDisposable, IAsyncProducerConsumerQueue<T>
     {
         /// <summary>
         /// The underlying queue.
@@ -63,7 +63,6 @@ namespace Nito.AsyncEx
         /// Gets whether this <see cref="AsyncProducerConsumerQueue{T}"/> has been marked as
         /// complete for adding and is empty.
         /// </summary>
-        /// <remarks>This method executes in time linear in the number of items in the queue.</remarks>
         public bool IsCompleted
         {
             get
@@ -73,7 +72,7 @@ namespace Nito.AsyncEx
                     if (!_completed.IsCancellationRequested)
                         return false;
 
-                    return this.AsEnumerable().Count() == 0;
+                    return _queue.Count == 0;
                 }
             }
         }
