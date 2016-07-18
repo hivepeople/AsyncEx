@@ -9,4 +9,4 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(false)]
 
 [assembly: AssemblyVersion("3.0.1.2")]
-[assembly: AssemblyInformationalVersion("3.0.1-zhivepeople2")]  // Also change Nito.AsyncEx.nuspec and Nito.AsyncEx.Dataflow.nuspec -->
+[assembly: AssemblyInformationalVersion("3.0.1-zhivepeople3")]  // Also change Nito.AsyncEx.nuspec and Nito.AsyncEx.Dataflow.nuspec -->
