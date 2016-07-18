@@ -2,6 +2,7 @@
 <package>
   <metadata>
     <id>Nito.AsyncEx</id>
+    <version>$version$</version>
     <title>Async and Task Helpers</title>
     <authors>Stephen Cleary</authors>
     <owners>Stephen Cleary</owners>

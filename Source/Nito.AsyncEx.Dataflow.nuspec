@@ -2,6 +2,7 @@
 <package>
   <metadata>
     <id>Nito.AsyncEx.Dataflow</id>
+    <version>$version$</version>
     <title>Dataflow Helpers</title>
     <authors>Stephen Cleary</authors>
     <owners>Stephen Cleary</owners>
